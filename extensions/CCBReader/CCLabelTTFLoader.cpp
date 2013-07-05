@@ -39,7 +39,15 @@ void CCLabelTTFLoader::onHandlePropTypeBlendFunc(CCNode * pNode, CCNode * pParen
 }
 
 void CCLabelTTFLoader::onHandlePropTypeFontTTF(CCNode * pNode, CCNode * pParent, const char * pPropertyName, const char * pFontTTF, CCBReader * pCCBReader) {
-    if(strcmp(pPropertyName, PROPERTY_FONTNAME) == 0) {
+    if(strcmp(pPropertyName, PROPERTY_FONTNAME) == 0){
+
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        std::string temp = "fonts/";
+        temp += pFontTTF;
+        temp += ".ttf";
+        pFontTTF = temp.c_str();
+        #endif
+        
         ((CCLabelTTF *)pNode)->setFontName(pFontTTF);
     } else {
         CCNodeLoader::onHandlePropTypeFontTTF(pNode, pParent, pPropertyName, pFontTTF, pCCBReader);
