@@ -26,15 +26,4 @@
 #ifndef SPINE_COCOS2DX_H_
 #define SPINE_COCOS2DX_H_
 
-#include <spine/spine.h>
-#include "cocos2d.h"
-#include <spine/CCSkeleton.h>
-#include <spine/CCSkeletonAnimation.h>
-
-namespace cocos2d { namespace extension {
-
-void RegionAttachment_updateQuad (RegionAttachment* self, Slot* slot, cocos2d::ccV3F_C4B_T2F_Quad* quad, bool premultiplied = false);
-
-}} // namespace cocos2d { namespace extension {
-
 #endif /* SPINE_COCOS2DX_H_ */
