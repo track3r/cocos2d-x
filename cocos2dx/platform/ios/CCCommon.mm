@@ -28,7 +28,7 @@
 #include <stdio.h>
 
 #import <UIKit/UIAlert.h>
-
+#include "CCFileUtils.h"
 NS_CC_BEGIN
 
 void CCLog(const char * pszFormat, ...)
@@ -41,6 +41,20 @@ void CCLog(const char * pszFormat, ...)
     va_end(ap);
     printf("%s", szBuf);
     printf("\n");
+    
+    auto path = CCFileUtils::sharedFileUtils()->getWritablePath();
+    path += "/cocos.log";
+    
+    time_t secs = time(0);
+    tm *t = localtime(&secs);
+    
+    FILE* f = fopen(path.c_str(), "a");
+    fprintf(f,"%04d-%02d-%02d %02d:%02d:%02d",
+            t->tm_year+1900,t->tm_mon+1,t->tm_mday,
+            t->tm_hour,t->tm_min,t->tm_sec);
+    
+    fprintf(f, " %s\n", szBuf);
+    fclose(f);
 }
 
 // ios no MessageBox, use CCLog instead
